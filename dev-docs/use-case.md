@@ -34,10 +34,10 @@ To use the reusable utility and functions (like logs, serverless yml file templa
 3. Handle all error case
 4. Maintain one file for most common issues that may occured in the used service and provide solution 
 5. Use plugins for serverless and provide instructions 
-   1. [ ] serverless offline 
+   1. [x] serverless offline 
    2. [ ] serverless-plugin-split-stacks
    3. [ ] serverless-aws-alias(check)
-   4. [ ] '@hewmen/serverless-plugin-typescript'
+   4. [x] '@hewmen/serverless-plugin-typescript' || serverless-plugin-typescript
    5. [ ] tsconfig-paths-webpack-plugin(check)
    6. [ ] serverless-plugin-warmup(schedule lambda function run so that they run faster on winter)
    7. [ ] serverless-plugin-optimize
@@ -75,3 +75,4 @@ To use the reusable utility and functions (like logs, serverless yml file templa
 19. use mysql2 as it supports promise (async,await)
 20. SNS should be able to send Email and SMS. Push notifications( cannot be implemented using cloudformation)
 21. implement step function
+22. add websocket support

@@ -52,8 +52,8 @@ ____
     > `sls create --template aws-nodejs --name [projectName]` 
 
 
-
-* To use typescript inplace of default javascript, follow these steps.
+##  TypeScript in AWS Lambda
+* To use typescript in place of default javascript, follow these steps.
     * Install serverless plugin to create and support offline invocation of functions defined in ts
         > `npm i -D serverless-plugin-typescript typescript`
     * Install types for node and aws-lambda
