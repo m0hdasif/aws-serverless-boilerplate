@@ -35,7 +35,7 @@ To use the reusable utility and functions (like logs, serverless yml file templa
 4. Maintain one file for most common issues that may occured in the used service and provide solution 
 5. Use plugins for serverless and provide instructions 
    1. [x] serverless offline 
-   2. [ ] serverless-plugin-split-stacks
+   2. [x] serverless-plugin-split-stacks
    3. [ ] serverless-aws-alias(check)
    4. [x] '@hewmen/serverless-plugin-typescript' || serverless-plugin-typescript
    5. [ ] tsconfig-paths-webpack-plugin(check)

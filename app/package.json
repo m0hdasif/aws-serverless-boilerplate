@@ -1,13 +1,13 @@
 {
   "name": "aws-serverless-boilerplate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Template for common services to provide the re-usability like logs, serverless yml file template, basic utility functions, nodejs  and services for the AWS.",
   "main": "index.js",
-  "dependencies": {
-    "typescript": "^3.7.5"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "typescript": "^3.7.5",
     "serverless-offline": "^5.12.1",
+    "serverless-plugin-split-stacks": "^1.9.3",
     "serverless-plugin-typescript": "^1.1.9"
   },
   "scripts": {

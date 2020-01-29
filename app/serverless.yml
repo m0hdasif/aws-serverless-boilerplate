@@ -17,11 +17,11 @@ service: aws-boilerplate
 #org: your-org-name
 
 # You can pin your service to only deploy with a specific Serverless version
-# Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 plugins:
-  - serverless-plugin-typescript
+  - serverless-plugin-typescript 
   - serverless-offline
+  - serverless-plugin-split-stacks
 
 provider:
   name: aws
@@ -60,6 +60,11 @@ package:
 #  exclude:
 #    - exclude-me.js
 #    - exclude-me-dir/**
+
+custom:
+  splitStacks:
+    perFunction: false
+    perType: true
 
 functions:
   hello:
