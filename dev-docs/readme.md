@@ -10,8 +10,8 @@ ____
 * change your working  directory
     >   `cd <PROJECT_NAME>`
 * install aws-cli globally using npm/apt/python packages (#Optional) 
-    #### apt package
-    > `sudo apt-get install awscli`
+    #### apt package (recommended for Ubuntu)
+    > `sudo apt-get install awscli` 
 
     #### Use python package
     **Pre-requirements**
@@ -21,7 +21,7 @@ ____
     *   if you have Python version 3+ installed, recommended
         > `pip3 install awscli `
 
-    #### Windows:
+    #### Executable file [only for windows(recommended)]:
     Download the executable file from the following link and run the file to install AWS-CLI:  
     [Go to official download page](https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html)      
     ##### Note: you may need to add path of the installed program to the environment variable 
@@ -37,8 +37,8 @@ ____
     ### Steps:
     Configure using one of the following options.
     1. Using aws cli 
-        >   `aws configure`
-
+        >   `aws configure [--profile <PROFILE_NAME>]` 
+        ##### for default profile, no need to mention profile name. If in case you have more than accesskey then use profile
         Please provide the valid inputs
         1. access key 
         2. secret key
@@ -46,11 +46,59 @@ ____
         4. type-> json
     2. Using serverless
         > `serverless config credentials --provider aws --accesskey <ACCESS_KEY> --secretkey <SECRET_KEY>`
-        *sls -> alias of serverless*
+        #### NOTE: sls -> alias of serverless*
         You can use any of the "serverless" or "sls" while using command
+        
 *   To create the development setup for AWS (##No need to for this project as it is already done)
-    > `sls create --template aws-nodejs --name [projectName]` 
+    > `sls create --template aws-nodejs --name <projectName>` 
 
+____
+
+## Development Process
+*   For invoking lambda function
+    *   In AWS server
+        > `sls invoke -f <functionName>`
+    *   In local environment
+        > `sls invoke local -f <functionName>`
+    *   To provide event(input Data for the function)
+        > `sls invoke -f [functionName] --data EVENT`
+    *    Syntax for using file as an event for lambda function
+        > `sls invoke -f [functionName] --path <filePath>` 
+        e.g 
+        > `serverless invoke local  -f user_list --path src/user/event.json`
+        <!--FilePath is relative to the serverless.yml file-->
+* To deploy
+    *   To deploy whole package
+        `sls deploy`
+    *   To deploy only function
+        `sls deploy function -f <functionName> [--stage] [stage]`
+        ###### It deploys only the functions i.e. changes made in the serverless.yml file will not reflect. 
+* To test API gateway locally
+    *   Install serverless plugin (serverless-offline)
+        1.  Using npm 
+            > `npm install serverless-offline --save-dev`
+            ##### Installing serverless-offline as dev dependency
+        2.  Using serverless*
+            > `serverless plugin install serverless-offline`
+    *   Include the plugin into project
+
+        Write following line in the same indentation of `service: <SERVICE_NAME>` line
+            
+        ```yaml
+        plugins:
+            -  serverless-offline
+        ```
+    *   Run your API locally
+        > `sls offline [--stage <stage>]`
+
+    *   For testing your API
+        * Download POSTMAN from https://www.getpostman.com/downloads/
+        * Set your working Environment in POSTMAN
+    ##### NOTE: profile name can be mentioned in serverless command by option (aws-profile)
+    e.g 
+    > `sls deploy [--aws-profile <PROFILE_NAME>]`
+
+# PLUGINS
 
 ##  TypeScript in AWS Lambda
 * To use typescript in place of default javascript, follow these steps.
@@ -64,32 +112,13 @@ ____
       * It will create `tsconfig.json` file in the root directory
         ##### Note: Don't modify outDir and baseDir property in tsconfig.json, else above plugin may not work properly.
 
-____
-## Important infomation regarding AWS services
-### Cognito
-#### Hard Limits
-* Access token Id expiration time - *1Hr*
-* Refresh token expiration time- can be configured between *1 day* to *10 years*.
-* For more details
-    * [cognito limits documentation](https://docs.aws.amazon.com/cognito/latest/developerguide/limits.html) 
-
-### Lambda
-#### Hard Limits
-* Invocation payload - *6 MB*
-* Max timeout - *15 minutes*
-* Environment variables - *4 KB*
-* Deployment Package Size - *50 MB* <sup><sub>(zipped)</sub></sup>
-* For more details
-    * [Lambda limits documentation](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) 
-
-### API Gateway
-#### Hard Limits
-* Integration time out - *29 Sec*
-* Payload Size - *10 MB*
-
-### SNS
-#### SMS is not supported in Mumbai(ap-south-1), Virginia(us-east-1) is supported o Jan 28 2020
-##### Sender Id is must as trai (so they are sending as XX-NOTICE), To change it follow below procedure
-
-
-###### cognito is sending otp to email/mobile , that has expiry time of 24 hours.
+## Split(nested) Stacks
+* Serverless stacks cannot occupy more than 200 resources, so there is a workaround by having nested stacks. We can have upto 200 nested stacks, each having capacity of 200 resources. Here, we are using `serverless-plugin-split-stacks` to do the same.
+    * Install the serveless plugin and add this plugin in `serverless.yml` file
+        > `npm i -D serverless-plugin-split-stacks`
+    * Add custom Variable in `serverless.yml` file
+        ```yaml
+        splitStacks:
+            perFunction: false # stack for each lambda function
+            perType: true # stack for each type like logs, permissions,lambda function 
+        ```

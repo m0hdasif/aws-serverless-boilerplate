@@ -55,10 +55,11 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    19. [ ] serverless-ses-template 
    20. [ ] serverless-vpc-plugin
    21. [ ] serverless-step-function
-   22. [ ] serverless-apigateway-service-proxy(If you want to expose API for SNS, SQS, S3, and Kinesis Streams, then you can use this plugin without Lambda, also AWS resources will be created by that plugin.)
-   23. [ ] serverless-stage-manager(to verify if stage is present in serverless.yml file)
-   24. [ ] serverless-domain-manager(Create custom domain names that your lambda can deploy to with serverless. Allows for base path mapping when deploying and deletion of domain names.)
-   25. [ ] Check other sls plugins(prune, dynamo db local, s3 local, sns local etc)
+   22. [ ] serverless-offline-scheduler
+   23. [ ] serverless-apigateway-service-proxy(If you want to expose API for SNS, SQS, S3, and Kinesis Streams, then you can use this plugin without Lambda, also AWS resources will be created by that plugin.)
+   24. [ ] serverless-stage-manager(to verify if stage is present in serverless.yml file)
+   25. [ ] serverless-domain-manager(Create custom domain names that your lambda can deploy to with serverless. Allows for base path mapping when deploying and deletion of domain names.)
+   26. [ ] Check other sls plugins(prune, dynamo db local, s3 local, sns local etc)
 6. **Implement in ts**
 7. Maintain one file for helpful commands for both sls and aws
 8. Chack if there is any library for plugins available for aws boilerplate
