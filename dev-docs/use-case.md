@@ -61,6 +61,12 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    25. [ ] serverless-domain-manager(Create custom domain names that your lambda can deploy to with serverless. Allows for base path mapping when deploying and deletion of domain names.)
    26. [ ] Check other sls plugins(prune, dynamo db local, s3 local, sns local etc)
    27. [ ] local Stack
+   28. [ ] Serverless CloudWatch Dashboards Plugin
+   29. [ ] serverless-cloudside-plugin
+   30. [ ] serverless-plugin-diff
+   31. [ ] serverless-deployment-bucket
+   32. [ ] serverless-offline-http-mock
+   33. [ ] Serverless Middleware(must check)
 
 6. **Implement in ts**
 7. Maintain one file for helpful commands for both sls and aws
