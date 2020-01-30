@@ -20,6 +20,7 @@ service: aws-boilerplate
 # frameworkVersion: "=X.X.X"
 plugins:
   - serverless-plugin-typescript 
+  - serverless-offline-scheduler # Need to use sls offline start / sls schedule 
   - serverless-offline
   - serverless-plugin-split-stacks
 
@@ -76,9 +77,9 @@ functions:
       - http:
           path: hello
           method: get
+      - schedule: rate(1 minutes)  # cannot schedule less than 1 minutes
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
-#      - schedule: rate(10 minutes)
 #      - sns: greeter-topic
 #      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
 #      - alexaSkill: amzn1.ask.skill.xx-xx-xx-xx

@@ -60,6 +60,8 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    24. [ ] serverless-stage-manager(to verify if stage is present in serverless.yml file)
    25. [ ] serverless-domain-manager(Create custom domain names that your lambda can deploy to with serverless. Allows for base path mapping when deploying and deletion of domain names.)
    26. [ ] Check other sls plugins(prune, dynamo db local, s3 local, sns local etc)
+   27. [ ] local Stack
+
 6. **Implement in ts**
 7. Maintain one file for helpful commands for both sls and aws
 8. Chack if there is any library for plugins available for aws boilerplate

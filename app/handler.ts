@@ -1,4 +1,5 @@
 export const hello = async (event: any, context: any) => {
+  console.log("ASIF: hello -> event", event);
   return {
     statusCode: 200,
     body: JSON.stringify({

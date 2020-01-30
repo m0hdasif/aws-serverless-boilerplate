@@ -8,7 +8,7 @@ ____
 ### Steps:
 * Clone the repository.
 * change your working  directory
-    >   `cd <PROJECT_NAME>`
+    >   `cd <PROJECT_NAME>/app`
 * install aws-cli globally using npm/apt/python packages (#Optional) 
     #### apt package (recommended for Ubuntu)
     > `sudo apt-get install awscli` 
@@ -61,18 +61,22 @@ ____
     *   In local environment
         > `sls invoke local -f <functionName>`
     *   To provide event(input Data for the function)
-        > `sls invoke -f [functionName] --data EVENT`
-    *    Syntax for using file as an event for lambda function
-        > `sls invoke -f [functionName] --path <filePath>` 
+        > `sls invoke -f [functionName] --data <EVENT>`
+    *   Syntax for using file as an event for lambda function
+        > `sls invoke -f [functionName] --path <FILE_PATH>`
+
         e.g 
         > `serverless invoke local  -f user_list --path src/user/event.json`
-        <!--FilePath is relative to the serverless.yml file-->
+
+        ##### Note: FilePath is relative to the serverless.yml file
+
 * To deploy
     *   To deploy whole package
-        `sls deploy`
+        > `sls deploy`
     *   To deploy only function
-        `sls deploy function -f <functionName> [--stage] [stage]`
-        ###### It deploys only the functions i.e. changes made in the serverless.yml file will not reflect. 
+        > `sls deploy function -f <functionName> [--stage <STAGE_NAME>]`
+        ##### NOTE: It deploys only the functions i.e. changes made in the serverless.yml file will not reflect. 
+
 * To test API gateway locally
     *   Install serverless plugin (serverless-offline)
         1.  Using npm 
@@ -82,7 +86,7 @@ ____
             > `serverless plugin install serverless-offline`
     *   Include the plugin into project
 
-        Write following line in the same indentation of `service: <SERVICE_NAME>` line
+        ##### Write the following line in the same indentation as `service: <SERVICE_NAME>` line
             
         ```yaml
         plugins:
@@ -94,9 +98,10 @@ ____
     *   For testing your API
         * Download POSTMAN from https://www.getpostman.com/downloads/
         * Set your working Environment in POSTMAN
-    ##### NOTE: profile name can be mentioned in serverless command by option (aws-profile)
-    e.g 
-    > `sls deploy [--aws-profile <PROFILE_NAME>]`
+        
+#### NOTE: profile name can be mentioned in serverless command by option (aws-profile)
+e.g 
+> `sls deploy [--aws-profile <PROFILE_NAME>]`
 
 # PLUGINS
 
@@ -122,3 +127,12 @@ ____
             perFunction: false # stack for each lambda function
             perType: true # stack for each type like logs, permissions,lambda function 
         ```
+
+## Schedule lambda function locally
+* Serverless lambda function can be scheduled with using rate or cron command. Rate of execution does not support less than 1 min. 
+    * Install plugin 
+        > ` npm i serverless-offline-scheduler -D`
+    * Add `serverless-offline-scheduler` into plugins array in serverless.yml
+    * Use either command to schedule:
+        > `serverless offline start` 
+        > `serverless schedule`
