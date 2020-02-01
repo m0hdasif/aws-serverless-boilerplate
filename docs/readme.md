@@ -1,5 +1,5 @@
-### FrameWork Used: *Serverless*
-### Service Provider: *Amazon Web Services (AWS)*
+### FrameWork: *Serverless*
+### Service: *Amazon Web Services (AWS)*
 
 ## Setup 
 ____
@@ -22,8 +22,7 @@ ____
         > `pip3 install awscli `
 
     #### Executable file [only for windows(recommended)]:
-    Download the executable file from the following link and run the file to install AWS-CLI:  
-    [Go to official download page](https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html)      
+    Download the executable file from [official download page](https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html) and execute file to install Aws-cli.
     ##### Note: you may need to add path of the installed program to the environment variable 
     
 * install all the dependencies by installing node_modules and dependent packages
@@ -46,11 +45,13 @@ ____
         4. type-> json
     2. Using serverless
         > `serverless config credentials --provider aws --accesskey <ACCESS_KEY> --secretkey <SECRET_KEY>`
-        #### NOTE: sls -> alias of serverless*
+        ##### NOTE: sls -> alias of serverless
         You can use any of the "serverless" or "sls" while using command
         
-*   To create the development setup for AWS (##No need to for this project as it is already done)
+*   To create a new project in nodejs for provider AWS 
     > `sls create --template aws-nodejs --name <projectName>` 
+
+    ##### Note: In order to use existing project, skip this step
 
 ____
 
@@ -81,7 +82,7 @@ ____
     *   Install serverless plugin (serverless-offline)
         1.  Using npm 
             > `npm install serverless-offline --save-dev`
-            ##### Installing serverless-offline as dev dependency
+            ###### Installing serverless-offline as dev dependency
         2.  Using serverless*
             > `serverless plugin install serverless-offline`
     *   Include the plugin into project
@@ -95,12 +96,11 @@ ____
     *   Run your API locally
         > `sls offline [--stage <stage>]`
 
-    *   For testing your API
-        * Download POSTMAN from https://www.getpostman.com/downloads/
+    *   For interacting with APIs
+        * Download [POSTMAN](https://www.getpostman.com/downloads/)
         * Set your working Environment in POSTMAN
         
-#### NOTE: profile name can be mentioned in serverless command by option (aws-profile)
-e.g 
+#### NOTE: profile name can be mentioned in serverless command by option (aws-profile) 
 > `sls deploy [--aws-profile <PROFILE_NAME>]`
 
 # PLUGINS
@@ -110,8 +110,8 @@ e.g
     * Install serverless plugin to create and support offline invocation of functions defined in ts
         > `npm i -D serverless-plugin-typescript typescript`
     * Install types for node and aws-lambda
-        > `npm i @types/node -D`
-        > `npm i @types/aws-lambda -D`
+        > `npm i -D @types/node  @types/aws-lambda`
+        
     * Now create typescript configuration
         > `tsc --init`  
       * It will create `tsconfig.json` file in the root directory
@@ -134,5 +134,8 @@ e.g
         > ` npm i serverless-offline-scheduler -D`
     * Add `serverless-offline-scheduler` into plugins array in serverless.yml
     * Use either command to schedule:
-        > `serverless offline start` 
-        > `serverless schedule`
+       1. Using serverless offline
+            > `serverless offline start`
+            ##### Note: 'start' keyword is necessary, otherwise offline server will start but without scheduling functions. (:bug: serverless-offline-scheduler@0.4.0)
+       2. Using schedule method
+            > `serverless schedule`
