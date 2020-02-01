@@ -1,0 +1,74 @@
+# Global buckets available access to all modules
+resources:
+  # define resources
+  Resources:
+    exampleBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.appName}-${self:custom.stage}-example-bucket # eg. aws-boilerplate-dev-example-bucket
+        Tags: 
+          - 
+            Key: Stage
+            Value: ${self:custom.stage}
+          - 
+            Key: App
+            Value: ${self:custom.appName} 
+        VersioningConfiguration:
+          Status: Enabled  # Allowed Values: Enabled | Suspended 
+        AccelerateConfiguration:
+          AccelerationStatus: Suspended # Allowed Values: Enabled | Suspended
+        AccessControl: PublicReadWrite #Allowed Values: Private|PublicRead|PublicReadWrite|AuthenticatedRead|LogDeliveryWrite|BucketOwnerRead|BucketOwnerFullControl|AwsExecRead
+        BucketEncryption:
+          ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: AES256  # Allowed Values: AES256 | aws:kms # Default value: AES256
+                # KMSMasterKeyID: string  # Only for aws:kms  # Get it from KMS->Customer Managed Key
+        LifecycleConfiguration:
+          Rules:
+            -
+              # AbortIncompleteMultipartUpload: 
+              #     DaysAfterInitiation: Integer # the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.
+              # ExpirationDate: Timestamp     # must be in ISO 8601 format: eg- 2020-02-01T12:08:56+0000
+              # ExpirationInDays: 365         # natural number
+              Id: logs  # uniqueIdentifier for lifeCycle rules
+              # NoncurrentVersionExpirationInDays: 30 #   natural number
+              # NoncurrentVersionTransitions: 
+              #   - 
+              #     StorageClass: GLACIER  # Allowed Values: DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | STANDARD_IA
+              #     TransitionInDays: 30   # natural number
+              Prefix: logs/   # applies to objects starting with logs
+              Status: Enabled # Allowed Values: Disabled | Enabled
+              # TagFilters:   # applies to subset of matching objects 
+              #   - 
+              #     Key: Stage
+              #     Value: dev 
+              Transitions: # It defines change of storage classes
+                - 
+                  StorageClass: GLACIER  # Allowed Values: DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | STANDARD_IA
+                  TransitionInDays: 90   # natural number
+                  # TransitionDate: TimeStamp       # date value must be in ISO 8601 format. The time is always midnight UTC.
+                  
+        # Set the CORS policy
+        CorsConfiguration:
+          # CorRules is an array, we can have multiple cor policies in CorsConfiguration
+          CorsRules:
+            -
+              AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+
+# outputs for the buckets
+outputs:
+  exampleBucketName: 
+    Description: "Sample Bucket"
+    Value: 
+      Ref: exampleBucket
+  

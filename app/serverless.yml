@@ -27,10 +27,13 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
+  stage: ${self:custom.stage} # default-> dev
+  region: ap-south-1          # default-> us-east-1
 
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
+# you can define service wide environment variables here
+  environment:
+    stage : ${self:custom.stage}
+    region: ${self:provider.region}
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -48,9 +51,6 @@ provider:
 #            - "Ref" : "ServerlessDeploymentBucket"
 #            - "/*"
 
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
 
 # you can add packaging information here
 package:
@@ -61,27 +61,31 @@ package:
 #  exclude:
 #    - exclude-me.js
 #    - exclude-me-dir/**
+  excludeDevDependencies: true
 
 custom:
+  # plugins variables
   splitStacks:
     perFunction: false
     perType: true
+  
+  # project variables
+  defaultStage: dev   # dev is default stage 
+  stage: ${opt:stage,self:custom.defaultStage} # set custom stage variable to use in other places
+  appName: ${self:service}
 
+# Add Lambda functions configuration here
 functions:
   - ${file(src/modules/hello/hello.yml)}
 
-#    Define function environment variables here
-#    environment:
-#      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+resources:
+  # yaml file for storing all s3 buckets
+  - ${file(resources/buckets.yml):resources}
+
+Outputs:
+  - ${file(./resources/buckets.yml):outputs}
+    # NewOutput:
+    #   Description: "Description for the output"
+    #   Value: "Some output value"
