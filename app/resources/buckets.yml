@@ -5,7 +5,7 @@ resources:
     exampleBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:custom.appName}-${self:custom.stage}-example-bucket # eg. aws-boilerplate-dev-example-bucket
+        BucketName: ${self:custom.exampleBucketName} # eg. aws-boilerplate-dev-example-bucket
         Tags: 
           - 
             Key: Stage

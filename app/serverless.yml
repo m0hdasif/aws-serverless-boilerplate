@@ -34,6 +34,13 @@ provider:
   environment:
     stage : ${self:custom.stage}
     region: ${self:provider.region}
+# s3 buckets custom configuration can be placed under provider (in camelCase not PascalCase)
+# Sub properties should be according to the specification
+  # s3:
+  #   exampleBucket:
+  #     name: my-custom-bucket-name
+  #     versioningConfiguration:
+  #       Status: Enabled
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -73,10 +80,12 @@ custom:
   defaultStage: dev   # dev is default stage 
   stage: ${opt:stage,self:custom.defaultStage} # set custom stage variable to use in other places
   appName: ${self:service}
+  exampleBucketName: ${self:custom.appName}-${self:custom.stage}-example-bucket
 
 # Add Lambda functions configuration here
 functions:
-  - ${file(src/modules/hello/hello.yml)}
+  - ${file(src/modules/hello/functions1.yml)}
+  - ${file(src/modules/hello/functions2.yml)}
 
 
 # you can add CloudFormation resource templates here

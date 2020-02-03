@@ -1,5 +1,5 @@
-hello:
-  handler: src/modules/hello/handler.hello
+lambda1:
+  handler: src/modules/hello/handler.lambda1
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
@@ -9,9 +9,37 @@ hello:
     #     enabled: true
         # input:            
     - http:
-        path: hello
+        path: hello1
         method: get
-      
+    # multiple s3 events, put it in array
+    - s3: # event when any object is created by any api
+        bucket: ${self:custom.exampleBucketName}
+        event: s3:ObjectCreated:*
+        rules:
+          - prefix: uploads/
+          - suffix: .jpg
+        existing: true      # doing this, will not create any new s3 bucket but it will create one permission and lambda function for the same s3 bucket events
+    - s3: # event when any object is delete
+        bucket: ${self:custom.exampleBucketName}
+        event: s3:ObjectRemoved:*
+        rules:
+          - prefix: thumbnails/
+          # - suffix: .png
+          - suffix: .jpg
+        existing: true
+
+
+# lambda 3 function 
+lambda3:
+  handler: src/modules/hello/handler.lambda3
+  events:
+    # - schedule:
+    #     rate: rate(1 minutes)
+    #     enabled: true
+        # input:            
+    - http:
+        path: hello3
+        method: get
     #- schedule: rate(1 minutes)  # cannot schedule less than 1 minutes
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
