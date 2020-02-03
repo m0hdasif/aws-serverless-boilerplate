@@ -13,10 +13,11 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    6. [ ] Cognito(and backup)
    7. [ ] Logs in S3 (use Logger)
    8. [ ] SES
-   9. [ ]  SNS and pinpoint
-   10. [ ]  SQS
+   9. [ ] SNS and pinpoint
+   10. [ ] SQS
    11. [ ] UUID Generator
    12. [ ] Session Management
+   13. [ ] VPC
 2.  Custom Status Codes
 3.  Custom Error Message
 4.  Error Handler
@@ -41,7 +42,7 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    5. [ ] tsconfig-paths-webpack-plugin(check)
    6. [ ] serverless-plugin-warmup(schedule lambda function run so that they run faster on winter)
    7. [ ] serverless-plugin-optimize
-   8. [ ] Serverless AWS Pseudo Parameters
+   8. [ ] Serverless AWS Pseudo Parameters (serverless-pseudo-parameters)
    9. [ ] Serverless Webpack
    10. [ ] Serverless Dotenv
    11. [ ] Serverless Mocha Plugin
@@ -75,6 +76,10 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    39. [ ] serverless-nested-stack(check)
    40. [ ] serverless-aws-nested-stack
    41. [ ] serverless-optimizer-plugin
+   42. [ ] serverless-dotenv-plugin
+   43. [ ] serverless-webpack
+   44. [ ] serverless-prune-plugin
+   45. [ ] serverless-offline-sns
 
 6. **Implement in ts**
 7. Maintain one file for helpful commands for both sls and aws
@@ -93,11 +98,14 @@ To use the reusable utility and functions (like logs, serverless yml file templa
 20. SNS should be able to send Email and SMS. Push notifications( cannot be implemented using cloudformation)
 21. implement step function
 22. add websocket support
-23. Resize image upload in s3 ( using s3 events and lambda)
+23. Resize image upload in s3 ( using s3 events and lambda)[ thumbnail support]
 24. use serverless deployment id for each deployment and maintain logs for deployment
 25. Set modules based resources and functions name, research how to achieve it
 26. Check how to use 'env' in yaml file
 27. set up CI/CD simply by adding a CodePipeline resource, and utilizing CodeBuild to pull down this repository, and run the make files.
 28. Use the serverless-domain-manager plug-in to enable domain functionality. Most of this structure is laid out, you just need to provide a valid ApiHostedZone, ApiSite, and ApiCert. This can be created in the AWS Console for Route53 and ACM and provided here as variables.
 29. check "Fn:: importValue" in serverless
-
+30. separate invocation for local, dev and prod support
+31. Try expressJs in serverless
+32. support workers
+33. maintain CHANGELOG.md

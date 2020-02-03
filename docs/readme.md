@@ -97,8 +97,10 @@ ____
         > `sls offline [--stage <stage>]`
 
     *   For interacting with APIs
-        * Download [POSTMAN](https://www.getpostman.com/downloads/)
-        * Set your working Environment in POSTMAN
+        * postman
+          * Download [Postman](https://www.getpostman.com/downloads/) and make request
+        * curl
+           > `curl -X <METHOD_NAME> -d <REQUEST_BODY> -H <HEADER> <ENDPOINT>`
         
 #### NOTE: profile name can be mentioned in serverless command by option (aws-profile) 
 > `sls deploy [--aws-profile <PROFILE_NAME>]`
