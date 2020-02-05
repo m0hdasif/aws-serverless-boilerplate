@@ -10,7 +10,7 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    3. [ ] Dynamo DB
    4. [ ] Mongo DB
    5. [ ] RDS(SQL)
-   6. [ ] Cognito(and backup)
+   6. [ ] Cognito(and its backup)
    7. [ ] Logs in S3 (use Logger)
    8. [ ] SES
    9. [ ] SNS and pinpoint
@@ -46,7 +46,7 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    9. [ ] Serverless Webpack
    10. [ ] Serverless Dotenv
    11. [ ] Serverless Mocha Plugin
-   12. [ ] Serverless S3 Remover
+   12. [ ] Serverless S3 Remover(serverless-s3-remover)
    13. [ ] serverless-step-functions-offline
    14. [ ] serverless-iam-roles-per-function
    15. [ ] serverless-plugin-aws-alerts
@@ -62,24 +62,30 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    25. [ ] serverless-domain-manager(Create custom domain names that your lambda can deploy to with serverless. Allows for base path mapping when deploying and deletion of domain names.)
    26. [ ] Check other sls plugins(prune, dynamo db local, s3 local, sns local etc)
    27. [ ] local Stack
-   28. [ ] Serverless CloudWatch Dashboards Plugin
-   29. [ ] serverless-cloudside-plugin
-   30. [ ] serverless-plugin-diff
-   31. [ ] serverless-deployment-bucket
-   32. [ ] serverless-offline-http-mock
-   33. [ ] Serverless Middleware(must check)
-   34. [ ] serverless-plugin-deploy-environment
-   35. [ ] Serverless Node.js Starter 
-   36. [ ] serverless-plugin-reducer
-   37. [ ] serverless-aws-documentation
-   38. [ ] serverless-plugin-additional-stacks(check)
-   39. [ ] serverless-nested-stack(check)
-   40. [ ] serverless-aws-nested-stack
-   41. [ ] serverless-optimizer-plugin
-   42. [ ] serverless-dotenv-plugin
-   43. [ ] serverless-webpack
-   44. [ ] serverless-prune-plugin
-   45. [ ] serverless-offline-sns
+   28. [ ] serverless-dynamodb-local
+   29. [ ] serverless-s3-local
+   30. [ ] Serverless CloudWatch Dashboards Plugin
+   31. [ ] serverless-cloudside-plugin
+   32. [ ] serverless-plugin-diff
+   33. [ ] serverless-deployment-bucket
+   34. [ ] serverless-offline-http-mock
+   35. [ ] Serverless Middleware(must check)
+   36. [ ] serverless-plugin-deploy-environment
+   37. [ ] Serverless Node.js Starter 
+   38. [ ] serverless-plugin-reducer
+   39. [ ] serverless-aws-documentation
+   40. [ ] serverless-plugin-additional-stacks(check)
+   41. [ ] serverless-nested-stack(check)
+   42. [ ] serverless-aws-nested-stack
+   43. [ ] serverless-optimizer-plugin
+   44. [ ] serverless-dotenv-plugin
+   45. [ ] serverless-webpack
+   46. [ ] serverless-prune-plugin
+   47. [ ] serverless-offline-sns
+   48. [ ] serverless-plugin-multiple-responses
+   49. [ ] tsconfig-paths-webpack-plugin 
+   50. [ ] serverless-mysql
+   51. [ ] serverless-plugin-canary-deployments
 
 6. **Implement in ts**
 7. Maintain one file for helpful commands for both sls and aws
