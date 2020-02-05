@@ -6,3 +6,5 @@ package-lock.json
 .serverless
 # serverless plugin typescript directories
 .build
+# secrets for serverless
+secrets.yml

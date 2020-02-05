@@ -25,6 +25,7 @@ plugins:
   - serverless-plugin-split-stacks
 
 provider:
+  profile: ${file(./secrets.yml):profile} # to avoid incidental deployment to other accounts (Value:aws-profile-name)
   name: aws
   runtime: nodejs12.x
   stage: ${self:custom.stage} # default-> dev
