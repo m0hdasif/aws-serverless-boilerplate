@@ -16,7 +16,7 @@ resources:
         VersioningConfiguration:
           Status: Enabled  # Allowed Values: Enabled | Suspended 
         AccelerateConfiguration:
-          AccelerationStatus: Suspended # Allowed Values: Enabled | Suspended
+          AccelerationStatus: Enabled # Allowed Values: Enabled | Suspended
         AccessControl: PublicReadWrite #Allowed Values: Private|PublicRead|PublicReadWrite|AuthenticatedRead|LogDeliveryWrite|BucketOwnerRead|BucketOwnerFullControl|AwsExecRead
         BucketEncryption:
           ServerSideEncryptionConfiguration:
