@@ -64,11 +64,58 @@ resources:
                 - DELETE
                 - HEAD
               MaxAge: 3000
-
+    staticWebsiteHostedBucket:
+      Type: AWS::S3::Bucket
+      # DeletionPolicy: Retain    # Whether to delete or retain on deleting the stack
+      Properties:
+        BucketName: ${self:custom.hostedBucketName} # eg. asifmansoori.com
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html # default error.html
+        Tags: 
+          - 
+            Key: hosting
+            Value: Enabled
+          - 
+            Key: App
+            Value: ${self:custom.appName} 
+        VersioningConfiguration:
+          Status: Suspended  # Allowed Values: Enabled | Suspended 
+        #AccelerateConfiguration:
+        # AccelerationStatus: Suspended # Allowed Values: Enabled | Suspended
+        AccessControl: PublicRead #Allowed Values: Private|PublicRead|PublicReadWrite|AuthenticatedRead|LogDeliveryWrite|BucketOwnerRead|BucketOwnerFullControl|AwsExecRead
+        BucketEncryption:
+          ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: AES256  # Allowed Values: AES256 | aws:kms # Default value: AES256
+                # KMSMasterKeyID: string  # Only for aws:kms  # Get it from KMS->Customer Managed Key  
+        # No need to set lifecycle configuration as we want to host the bucket
+        # Set the CORS policy
+        CorsConfiguration:
+          # CorRules is an array, we can have multiple cor policies in CorsConfiguration
+          CorsRules:
+            -
+              AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
 # outputs for the buckets
 outputs:
   exampleBucketName: 
     Description: "Sample Bucket"
     Value: 
       Ref: exampleBucket
+  s3HostedWebsiteURL:
+    Value: 
+      Fn::GetAtt: 
+        - staticWebsiteHostedBucket
+        - WebsiteURL
+    Description: URL for website hosted on S3
   

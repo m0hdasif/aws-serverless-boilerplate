@@ -23,6 +23,7 @@ plugins:
   - serverless-offline-scheduler # Need to use sls offline start / sls schedule 
   - serverless-offline
   - serverless-plugin-split-stacks
+  - serverless-s3-deploy
 
 provider:
   profile: ${file(./secrets.yml):profile} # to avoid incidental deployment to other accounts (Value:aws-profile-name)
@@ -72,16 +73,31 @@ package:
   excludeDevDependencies: true
 
 custom:
-  # plugins variables
-  splitStacks:
-    perFunction: false
-    perType: true
   
   # project variables
   defaultStage: dev   # dev is default stage 
   stage: ${opt:stage,self:custom.defaultStage} # set custom stage variable to use in other places
   appName: ${self:service}
   exampleBucketName: ${self:custom.appName}-${self:custom.stage}-example-bucket
+  hostedBucketName: ${self:custom.appName}-${self:custom.stage}-asif.com
+  
+  ## plugins variables
+  # variables for serverless-plugin-split-stack
+  splitStacks:
+    perFunction: false
+    perType: true
+  # serverless s3 sync
+  assets:
+    auto: true  # start uploading object after deployment to all buckets
+    targets:
+      - bucket: ${self:custom.hostedBucketName} # Ref: serverless variable can also be used
+        files:
+          - source: ../assets   # several sources can be provided
+            acl: public-read  # make each uploaded object public
+            globs: '**/*.html' # TODO: check the usage, not working without this
+            defaultContentType: text/html
+            headers:
+              CacheControl: max-age=31104000 # 1 year
 
 # Add Lambda functions configuration here
 functions:
@@ -95,7 +111,10 @@ resources:
   - ${file(resources/buckets.yml):resources}
 
 Outputs:
-  - ${file(./resources/buckets.yml):outputs}
-    # NewOutput:
-    #   Description: "Description for the output"
-    #   Value: "Some output value"
+  exampleBucketName:
+    ${file(./resources/buckets.yml):outputs.exampleBucketName}
+  s3HostedWebsiteURL: 
+    ${file(./resources/buckets.yml):outputs.s3HostedWebsiteURL}
+  # NewOutput:
+  #   Description: "Description for the output"
+  #   Value: "Some output value"
