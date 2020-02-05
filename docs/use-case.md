@@ -115,3 +115,4 @@ To use the reusable utility and functions (like logs, serverless yml file templa
 31. Try expressJs in serverless
 32. support workers
 33. maintain CHANGELOG.md
+34. url shortener
