@@ -12,6 +12,7 @@ lambda1:
         path: hello1
         method: get
     # multiple s3 events, put it in array
+    # TODO: find a way to skip creation of custom resource for property existing:true
     - s3: # event when any object is created by any api
         bucket: ${self:custom.exampleBucketName}
         event: s3:ObjectCreated:*
