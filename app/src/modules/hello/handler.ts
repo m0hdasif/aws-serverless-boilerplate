@@ -1,5 +1,6 @@
 export const lambda1 = async (event: any, context: any) => {
   console.log("ASIF: hello2 -> event", event);
+  console.log(`ASIF: process.env`, process.env);
   return {
     statusCode: 200,
     body: JSON.stringify({

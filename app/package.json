@@ -10,6 +10,7 @@
     "serverless-plugin-split-stacks": "^1.9.3",
     "serverless-plugin-typescript": "^1.1.9",
     "serverless-s3-deploy": "^0.9.0",
+    "serverless-secrets-plugin": "^0.1.0",
     "typescript": "^3.7.5"
   },
   "scripts": {

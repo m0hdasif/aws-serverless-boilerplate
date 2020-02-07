@@ -116,3 +116,4 @@ To use the reusable utility and functions (like logs, serverless yml file templa
 32. support workers
 33. maintain CHANGELOG.md
 34. url shortener
+35. Automate encryption and decryption while executing project offline or deploying  [serverless-secrets-plugin]

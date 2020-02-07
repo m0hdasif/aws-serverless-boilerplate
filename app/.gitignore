@@ -8,3 +8,5 @@ package-lock.json
 .build
 # secrets for serverless
 secrets.yml
+# stage specific secrets
+environments/secrets.*.yml

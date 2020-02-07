@@ -141,3 +141,17 @@ ____
             ##### Note: 'start' keyword is necessary, otherwise offline server will start but without scheduling functions. (:bug: serverless-offline-scheduler@0.4.0)
        2. Using schedule method
             > `serverless schedule`
+
+## Maintain Stage related secrets
+* To maintain secrets and share encryted variable without any fear of revealing it in repo. 
+  * Install plugin and add the plugin into plugins array
+    > `npm i -D serverless-secrets-plugin`
+  * To encrypt the file to encrypted file
+    > `serverless encrypt --stage|-s STAGE --password|-p PASSWORD`
+  * To decrypt the secret file
+    > `serverless decrypt --stage|-s STAGE --password|-p PASSWORD`
+  * (Optional) To change the filepath of secrets, add custom Variable in `serverless.yml` file
+    ```yaml
+    secretsFilePathPrefix: filePath
+    ```
+##### Note: This method is better than no-encryption, but not recommended. AWS recommends to use AWS-KMS instead of environment variables.
