@@ -51,7 +51,7 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    14. [ ] serverless-iam-roles-per-function
    15. [ ] serverless-plugin-aws-alerts
    16. [ ] serverless-secrets-plugin
-   17. [ ] serverless-s3-deploy 
+   17. [x] serverless-s3-deploy  || serverless-s3-sync
    18. [ ] serverless-api-stage
    19. [ ] serverless-ses-template 
    20. [ ] serverless-vpc-plugin

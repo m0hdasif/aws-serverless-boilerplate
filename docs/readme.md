@@ -125,7 +125,7 @@ ____
         > `npm i -D serverless-plugin-split-stacks`
     * Add custom Variable in `serverless.yml` file
         ```yaml
-        splitStacks:
+        splitStacks: # any one the parameter should be type,type will take precedence
             perFunction: false # stack for each lambda function
             perType: true # stack for each type like logs, permissions,lambda function 
         ```
@@ -133,7 +133,7 @@ ____
 ## Schedule lambda function locally
 * Serverless lambda function can be scheduled with using rate or cron command. Rate of execution does not support less than 1 min. 
     * Install plugin 
-        > ` npm i serverless-offline-scheduler -D`
+        > ` npm i -D serverless-offline-scheduler`
     * Add `serverless-offline-scheduler` into plugins array in serverless.yml
     * Use either command to schedule:
        1. Using serverless offline
