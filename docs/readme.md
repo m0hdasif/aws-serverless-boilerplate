@@ -142,6 +142,22 @@ ____
        2. Using schedule method
             > `serverless schedule`
 
+## Deploy resources to s3 bucket 
+* Upload your resources/objects to s3 bucket using `s3deploy` plugin
+  * Install plugin and add plugin to serverless.yml
+    > `npm i -D serverless-s3-deploy`
+  * To deploy resources
+    > `serverless s3deploy`
+  * Add configuration variables as custom vars
+    ```yml
+    assets:
+        auto: true  # start uploading object after deployment to all buckets
+        targets:
+        - bucket: BucketName # Ref: serverless variable can also be used
+            files:
+            - source: folderPath   # several sources can be provided
+    ```
+
 ## Maintain Stage related secrets
 * To maintain secrets and share encryted variable without any fear of revealing it in repo. 
   * Install plugin and add the plugin into plugins array
@@ -155,3 +171,4 @@ ____
     secretsFilePathPrefix: filePath
     ```
 ##### Note: This method is better than no-encryption, but not recommended. AWS recommends to use AWS-KMS instead of environment variables.
+##### Note: used password for encryption/decrytion : 'asif'

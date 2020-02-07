@@ -2,6 +2,12 @@
 ____
 #### All notable changes to the "aws-serverless-boilerplate" will be documented in this file.
 
+### [0.5.0]
+* Added feature for deploying resources to s3 bucket
+* Added feature for website hosting in s3 bucket
+* Added feature for storing stage related secrets in encrypted format
+
+
 ### [0.4.1]
 * Added s3 events to lambda functions
 * Fixed package version
