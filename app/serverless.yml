@@ -35,8 +35,8 @@ provider:
 
 # you can define service wide environment variables here
   environment:
-    stage : ${self:custom.stage}
-    region: ${self:provider.region}
+    STAGE : ${self:custom.stage}
+    REGION: ${self:provider.region}
     DB_HOST_NAME: ${self:custom.secrets.db.hostName}
     DB_PORT: ${self:custom.secrets.db.port}
     DB_USER_NAME: ${self:custom.secrets.db.userName}
