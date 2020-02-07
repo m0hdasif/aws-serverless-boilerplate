@@ -1,9 +1,10 @@
 
 # Aws-Serverless-NodeJs-Template <!-- omit in toc -->
 
-### FrameWork: *Serverless*  
-### Service: *Amazon Web Services (AWS)* 
+#### FrameWork: *Serverless*  
+#### Service: *Amazon Web Services (AWS)* 
 
+### Table of Content
 - [Setup](#setup)
   - [Install aws-cli globally (Optional)](#install-aws-cli-globally-optional)
     - [apt package (recommended for Ubuntu)](#apt-package-recommended-for-ubuntu)
@@ -19,7 +20,7 @@
     - [Install package dependencies](#install-package-dependencies)
 - [Development Process](#development-process)
     - [Invoke Lambda function](#invoke-lambda-function)
-    - [Deploy resources](#deploy-resources)
+    - [Deployment](#deployment)
     - [Run API gateway locally](#run-api-gateway-locally)
     - [Miscellaneous](#miscellaneous)
 - [Plugins](#plugins)
@@ -36,15 +37,21 @@ For setting up the development environment, please follow the provided steps.
 ### Install aws-cli globally (Optional) 
 
 #### apt package (recommended for Ubuntu)
-> `sudo apt-get install awscli` 
+```sh
+sudo apt-get install awscli
+```
 
 #### Use python package
 **Pre-requirements**
 *  Python should be installed on your system
 *  Pip should be installed.
-    > `pip install awscli `
+    ```sh
+    pip install awscli 
+    ```
 *   if you have Python version 3+ installed
-      > `pip3 install awscli `
+      ```sh 
+      pip3 install awscli 
+      ```
 
 #### Executable file (recommended for windows)
 * Download the executable file from [aws official download page](https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html), execute file and follow on-screen steps to install Aws-cli.
@@ -54,7 +61,9 @@ For setting up the development environment, please follow the provided steps.
 
 ### Install serverless globally
 * Execute following command in your terminal
-    > `npm install serverless -g` 
+    ```sh 
+    npm install serverless -g
+    ```
 
 ### Configure AWS Account
 Configure the aws account to which resources need to be deployed
@@ -67,7 +76,10 @@ Configure the aws account to which resources need to be deployed
 Configure using one of the following options.
 
 - Aws-cli 
-    >   `aws configure [--profile PROFILE_NAME]` 
+  
+    ```sh
+    aws configure [--profile PROFILE_NAME]
+    ``` 
     ###### for default profile, no need to mention profile name. If in case you have more than accesskey then use profile
     Please provide the valid inputs
     1. access key : AccessKey from IAM  
@@ -75,56 +87,85 @@ Configure using one of the following options.
     3. region (Default: `us-east-2`) Choose: `ap-south-1` for `Mumbai,India`
     4. type: json
 - Serverless
-    > `serverless config credentials --provider aws --accesskey <ACCESS_KEY> --secretkey <SECRET_KEY>`
+    ```sh 
+    serverless config credentials --provider aws --accesskey <ACCESS_KEY> --secretkey <SECRET_KEY>
+    ```
     ###### NOTE: sls: alias of serverless
     You can use any of the `serverless` or `sls` while using command
 
 ### Project Creation   
 #### Create Project 
 * To create a new project in nodejs for provider AWS 
-    > `sls create --template aws-nodejs --name <projectName>` 
+    ```sh 
+    sls create --template aws-nodejs --name <projectName>
+    ```
 
     ###### Note: In order to use existing project, skip step for creation of new template
     
 #### Use existing project
 * Clone the repository.
-* change your working  directory
-    >   `cd <ROOT_DIRECTORY>`
+  ```sh
+  git clone <REPO_URL>
+  ```
+* change to app directory
+    ```sh
+    cd <APP_ROOT_DIRECTORY>
+    ```
 
 #### Install package dependencies
 * Install all the dependencies by installing node_modules and dependent packages
-    > `npm install`
+    ```sh 
+    npm install
+    ```
 
 ## Development Process
 #### Invoke Lambda function 
   *   In AWS server
-      > `sls invoke -f <functionName>`
+      ```sh 
+      sls invoke -f <functionName>
+      ```
   *   In local environment
-      > `sls invoke local -f <functionName>`
+      ```sh 
+      sls invoke local -f <functionName>
+      ```
   *   To provide event(input Data for the function)
-      > `sls invoke -f [functionName] --data <EVENT>`
+      ```sh 
+      sls invoke -f [functionName] --data <EVENT>
+      ```
   *   Syntax for using file as an event for lambda function
-      > `sls invoke -f [functionName] --path <FILE_PATH>`
-
-      e.g 
-      > `serverless invoke local  -f user_list --path src/user/event.json`
+      ```sh 
+      sls invoke -f [functionName] --path <FILE_PATH>
+      ```
+      E.g
+       
+      ```sh 
+      serverless invoke local  -f user_list --path src/event.json
+      ```
 
       ###### Note: all FILE_PATH is relative to the serverless.yml file
 
 #### Deployment
 *   To deploy whole package
-    > `sls deploy`
+    ```sh 
+    sls deploy
+    ```
 *   To deploy only function
-    > `sls deploy function -f <functionName> [--stage <STAGE_NAME>]`
+    ```sh 
+    sls deploy function -f <functionName> [--stage <STAGE_NAME>]
+    ```
     ###### NOTE: It deploys only the lambda functions i.e. changes made in the serverless.yml file will not reflect. 
 
 #### Run API gateway locally
 *   Install serverless plugin (serverless-offline)
     1.  Using npm 
-        > `npm install -D serverless-offline `
+        ```sh 
+        npm install -D serverless-offline 
+        ```
         ###### Installing serverless-offline as dev dependency
     2.  Using serverless*
-        > `serverless plugin install serverless-offline`
+        ```sh 
+        serverless plugin install serverless-offline
+        ```
 *   Include the plugin into project
         
     ```yaml
@@ -132,36 +173,50 @@ Configure using one of the following options.
         -  serverless-offline
     ```
 *   Run your API locally
-    > `sls offline [--stage <stage>]`
+    ```sh 
+    sls offline [--stage <stage>]
+    ```
 
 *   For interacting with APIs
     * postman
       * Download [Postman](https://www.getpostman.com/downloads/) and make request
     * curl
-       > `curl -X <METHOD_NAME> -d <REQUEST_BODY> -H <HEADER> <ENDPOINT>`
+       ```sh 
+       curl -X <METHOD_NAME> -d <REQUEST_BODY> -H <HEADER> <ENDPOINT>
+       ```
        
 #### Miscellaneous 
 * AWS Profile name can be mentioned in serverless command by providing option (aws-profile) E.g
-    > `sls deploy [--aws-profile <PROFILE_NAME>]`
+    ```sh 
+    sls deploy [--aws-profile <PROFILE_NAME>]
+    ```
 
 ## Plugins
 
 ### TypeScript in AWS Lambda
 * To use typescript in place of default javascript, follow these steps.
     * Install serverless plugin to create and support offline invocation of functions defined in ts
-        > `npm i -D serverless-plugin-typescript typescript`
+        ```sh 
+        npm i -D serverless-plugin-typescript typescript
+        ```
     * Install types for node and aws-lambda
-        > `npm i -D @types/node  @types/aws-lambda`
+        ```sh 
+        npm i -D @types/node  @types/aws-lambda
+        ```
         
     * Now create typescript configuration
-        > `tsc --init`  
+        ```sh 
+        tsc --init` 
+        ```
       * It will create `tsconfig.json` file in the root directory
         ##### Note: Don't modify outDir and baseDir property in tsconfig.json, else above plugin may not work properly.
 
 ### Split(nested) Stacks
 * Serverless stacks cannot occupy more than 200 resources, so there is a workaround by having nested stacks. We can have upto 200 nested stacks, each having capacity of 200 resources. Here, we are using `serverless-plugin-split-stacks` to do the same.
     * Install the plugin and add this into plugins array
-        > `npm i -D serverless-plugin-split-stacks`
+        ```sh 
+        npm i -D serverless-plugin-split-stacks
+        ```
     * Add custom Variable in `serverless.yml` file
         ```yaml
         splitStacks: # any one of the parameter should be true,type will take precedence
@@ -172,21 +227,31 @@ Configure using one of the following options.
 ### Schedule lambda function locally
 * Serverless lambda function can be scheduled with using rate or cron command. Rate of execution does not support less than 1 min. 
     * Install plugin 
-        > ` npm i -D serverless-offline-scheduler`
+        ```sh 
+         npm i -D serverless-offline-scheduler
+         ```
     * Add `serverless-offline-scheduler` into plugins array in serverless.yml
     * Use either command to schedule:
        1. Using serverless offline
-            > `serverless offline start`
+            ```sh 
+            serverless offline start
+            ```
             ##### Note: 'start' keyword is necessary, otherwise offline server will start but without scheduling functions. (:bug: serverless-offline-scheduler@0.4.0)
        2. Using schedule method
-            > `serverless schedule`
+            ```sh 
+            serverless schedule
+            ```
 
 ### Deploy resources to s3 bucket 
 * Upload your resources/objects to s3 bucket using `s3deploy` plugin
   * Install plugin and add plugin to serverless.yml
-    > `npm i -D serverless-s3-deploy`
+    ```sh 
+    npm i -D serverless-s3-deploy
+    ```
   * To deploy resources
-    > `serverless s3deploy`
+    ```sh 
+    serverless s3deploy
+    ```
   * Add configuration variables as custom vars
     ```yml
     assets:
@@ -200,11 +265,17 @@ Configure using one of the following options.
 ### Maintain Stage related secrets
 * To maintain secrets and share encryted variable without any fear of revealing it in repo. 
   * Install plugin and add the plugin into plugins array
-    > `npm i -D serverless-secrets-plugin`
+    ```sh 
+    npm i -D serverless-secrets-plugin
+    ```
   * To encrypt the file to encrypted file
-    > `serverless encrypt --stage|-s STAGE --password|-p PASSWORD`
+    ```sh 
+    serverless encrypt --stage|-s STAGE --password|-p PASSWORD
+    ```
   * To decrypt the secret file
-    > `serverless decrypt --stage|-s STAGE --password|-p PASSWORD`
+    ```sh 
+    serverless decrypt --stage|-s STAGE --password|-p PASSWORD
+    ```
   * To change the file-path of secrets, add custom Variable in `serverless.yml` file (Optional)
     ```yaml
     secretsFilePathPrefix: filePath
