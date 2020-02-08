@@ -14,6 +14,8 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
+    "debug":"export SLS_DEBUG=* && node --inspect=5858 /usr/local/bin/serverless offline -s dev",
+    "start": "/usr/local/bin/serverless offline start -s dev ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

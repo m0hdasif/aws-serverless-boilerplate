@@ -1,2 +1,4 @@
-# vs code configuration files or directories
-.vscode
+# exclude vs code configuration files or directories
+.vscode/* 
+# include vs code debug environment
+!.vscode/launch.json
