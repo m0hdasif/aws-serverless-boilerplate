@@ -4,10 +4,9 @@ lambda1:
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
   events:
-    # - schedule:
-    #     rate: rate(1 minutes)
-    #     enabled: true
-        # input:            
+    - schedule:
+        rate: rate(10 days)
+        enabled: false
     - http:
         path: hello1
         method: get
