@@ -1,10 +1,11 @@
 {
   "name": "aws-serverless-boilerplate",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Template for common services to provide the re-usability like logs, serverless yml file template, basic utility functions, nodejs  and services for the AWS.",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
+    "aws-sdk": "^2.614.0",
     "serverless-offline": "^5.12.1",
     "serverless-offline-scheduler": "^0.4.0",
     "serverless-plugin-split-stacks": "^1.9.3",
@@ -14,7 +15,7 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "debug":"export SLS_DEBUG=* && node --inspect=5858 /usr/local/bin/serverless offline -s dev",
+    "debug": "export SLS_DEBUG=* && node --inspect=5858 /usr/local/bin/serverless offline -s dev -v",
     "start": "/usr/local/bin/serverless offline start -s dev ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

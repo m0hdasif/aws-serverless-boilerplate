@@ -1,0 +1,16 @@
+# Intentionally created 2 lambda functions for testing action based event
+lambda4:
+  handler: src/modules/websocket/socket-handler.lambda4
+  events:
+    - websocket: 
+        route: $default
+    - websocket:
+        route: $connect
+    - websocket:
+        route: $disconnect
+
+lambda5:
+  handler: src/modules/websocket/socket-handler.lambda5
+  events:
+    - websocket:
+        route: echo
