@@ -17,7 +17,7 @@ service: aws-boilerplate
 #org: your-org-name
 
 # You can pin your service to only deploy with a specific Serverless version
-# frameworkVersion: "=X.X.X"
+frameworkVersion: ">=1.55.1 <2.0.0"
 plugins:
   - serverless-plugin-typescript 
   - serverless-offline-scheduler # Need to use sls offline start / sls schedule 
