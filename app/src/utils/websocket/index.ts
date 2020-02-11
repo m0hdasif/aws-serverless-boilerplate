@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk';
-import {isNotExist,removeElem} from   '../common';
+import {isNotExist,removeElem} from   '@utils/common';
 
 const SOCKET_API_VERSION = '2018-11-29';
 

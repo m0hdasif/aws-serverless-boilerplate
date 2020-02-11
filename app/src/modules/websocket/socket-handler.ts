@@ -1,4 +1,5 @@
-import {WebSocket} from '../../utils/websocket';
+import 'module-alias/register'; // for allowing @utils alias in js
+import {WebSocket} from '@utils/websocket';
 
 // ! It is not maintaining connections across inter-lambda functions
 export async function lambda4 (event: any, context: any){
