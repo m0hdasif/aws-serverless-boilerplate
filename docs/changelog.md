@@ -1,6 +1,14 @@
 ## Change Log
-____
-#### All notable changes to the "aws-serverless-boilerplate" will be documented in this file.
+
+#### All notable changes to the "aws-serverless-nodejs-template" will be documented in this file.
+
+### [0.6.1]
+* Added aliases for modules(services and utils)
+
+### [0.6.0]
+* Added websocket API support
+* Added debugging configuration
+
 
 ### [0.5.0]
 * Added feature for deploying resources to s3 bucket
