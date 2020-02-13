@@ -27,13 +27,16 @@ plugins:
   - serverless-secrets-plugin
 
 provider:
+  ## project variables
   profile: ${file(./secrets.yml):profile} # to avoid incidental deployment to other accounts (Value:aws-profile-name)
   name: aws
   runtime: nodejs12.x
   stage: ${self:custom.stage} # default-> dev
   region: ap-south-1          # default-> us-east-1
+  ## Plugin variables 
+  # websocketApiRouteSelectionExpression: $request.body.action # default value
 
-# you can define service wide environment variables here
+  ## you can define service wide environment variables here
   environment:
     STAGE : ${self:custom.stage}
     REGION: ${self:provider.region}
@@ -69,9 +72,9 @@ provider:
 #            - "/*"
 
 
-# you can add packaging information here
+## you can add packaging information here
 package:
-  individually: true
+  individually: true  # Allowed values: false|true # default value:false # true will create separate zip for each lambda function
 #  include:
 #    - include-me.js
 #    - include-me-dir/**
@@ -82,15 +85,16 @@ package:
 
 custom:
   
-  # project variables
+  ## project variables
   defaultStage: dev   # dev is default stage 
   stage: ${opt:stage,self:custom.defaultStage} # set custom stage variable to use in other places
   appName: ${self:service}
   exampleBucketName: ${self:custom.appName}-${self:custom.stage}-example-bucket
   hostedBucketName: ${self:custom.appName}-${self:custom.stage}-asif.com
   secrets: ${file(environments/secrets.${self:custom.stage}.yml)}
+  resourcePrefix: ${self:custom.appName}-${self:custom.stage}
   ## plugins variables
-  # variables for serverless-plugin-split-stack
+  # serverless-plugin-split-stack
   splitStacks:
     perFunction: false
     perType: true
@@ -109,14 +113,14 @@ custom:
   # serverless secret plugin
   secretsFilePathPrefix: environments
 
-# Add Lambda functions configuration here
+## Add Lambda functions configuration here
 functions:
   - ${file(src/modules/hello/functions1.yml)}
   - ${file(src/modules/hello/functions2.yml)}
   - ${file(src/modules/websocket/socket.yml)}
 
 
-# you can add CloudFormation resource templates here
+## you can add CloudFormation resource templates here
 resources:
   # yaml file for storing all s3 buckets
   - ${file(resources/buckets.yml):resources}
