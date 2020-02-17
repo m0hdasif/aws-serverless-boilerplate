@@ -1,0 +1,140 @@
+# Cognito user pools and its app client configuration
+resources:
+  # define resources
+  Resources:
+    # User pool configuration with all the basic or immediate options enabled
+    CognitoUserPoolUserPool:
+      Type: AWS::Cognito::UserPool
+      DeletionPolicy: Retain # Allowed Values: retain|delete # Default value:retain
+      Properties:
+        UserPoolName: ${self:custom.userpoolName}
+        UserPoolTags: # type: JSON
+          STAGE: ${self:custom.stage}
+          APP: ${self:custom.appName}
+        ## Only one of the aliasAttributes or usernameAttributes can be set in a User pool
+        AliasAttributes: # Users can use a username and optionally multiple alternatives to sign up and sign in.
+          - email
+          - phone_number
+          - preferred_username
+        # UsernameAttributes: # whether email addresses or phone numbers can be specified as user names when a user signs up.
+        #   - email   # email|phone_number
+        AdminCreateUserConfig:
+          AllowAdminCreateUserOnly: false # if false,user can signup himself
+          UnusedAccountValidityDays: 90 # Allowed Values: 0-365 days
+          InviteMessageTemplate:
+            EmailMessage: "Hi {username},your password is {####}" #String
+            EmailSubject: "Welcome to app" # String
+            SMSMessage: "Welcome {username}, your password is {####}" # {####} is password to login
+        Schema:
+          - Name: role
+            AttributeDataType: String # Boolean | DateTime | Number | String
+            DeveloperOnlyAttribute: true # only admin can modify the value of custom attributes
+            Mutable: true
+            StringAttributeConstraints: # NumberAttributeConstraints |StringAttributeConstraints
+              MaxLength: 256
+              MinLength: 10
+            Required: false # required custom attributes are not supported on 18th Feb 2020
+          - Name: firstName
+            AttributeDataType: String # Boolean | DateTime | Number | String
+            DeveloperOnlyAttribute: false # only admin can modify the value of custom attributes
+            Mutable: true
+            StringAttributeConstraints:
+              MaxLength: 256
+              MinLength: 10
+            Required: false
+          - Name: lastName
+            AttributeDataType: String # Boolean | DateTime | Number | String
+            DeveloperOnlyAttribute: false # only admin can modify the value of custom attributes
+            Mutable: true
+            StringAttributeConstraints:
+              MaxLength: 256
+              MinLength: 10
+            Required: false
+          - Name: createdAt
+            AttributeDataType: DateTime # Boolean | DateTime | Number | String
+            DeveloperOnlyAttribute: true # only admin can modify the value of custom attributes
+            Mutable: false
+            StringAttributeConstraints:
+              MaxLength: 256
+              MinLength: 10
+            Required: false
+        # SMS configuration and Auto verification for phone_number are required when MFA is required/optional
+        MfaConfiguration: "OFF" # OFF | ON | OPTIONAL 
+        AutoVerifiedAttributes:
+          - email
+          # - phone_number   # for phone_number, SMS configuration is must
+        # SmsConfiguration:
+        #   ExternalId: String # ExternalId to add security to your IAM role,
+        #   SnsCallerArn: String # SNS ARN by using which sms will be sent
+        # EnabledMfas:
+        #   - SMS_MFA # SMS_MFA | SOFTWARE_TOKEN_MFA
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 8
+            RequireLowercase: true
+            RequireUppercase: true
+            RequireNumbers: true
+            RequireSymbols: true
+        AccountRecoverySetting:
+          RecoveryMechanisms:
+            - Name: verified_phone_number # admin_only | verified_email | verified_phone_number
+              Priority: 1
+            - Name: verified_email
+              Priority: 2
+        # EmailConfiguration:
+        #   ConfigurationSet: String # TODO: check this property
+        #   EmailSendingAccount: DEVELOPER # COGNITO_DEFAULT | DEVELOPER (SES) # need to create permissions for SES to send emails on behalf on cognito
+        #   From: muhammadasifmansoori@gmail.com # Default value: no-reply@verificationemail.com
+        #   ReplyToEmailAddress: muhammadasifmansoori@gmail.com # needs to be verified
+        #   SourceArn: String # get arn on verifying email Id
+        DeviceConfiguration:
+          ChallengeRequiredOnNewDevice: true
+          DeviceOnlyRememberedOnUserPrompt: false
+        # we can set trigger using lambdaConfig also but because of reference bug, we are not going to use it and 
+        # even on assigning lambda trigger as event in function definition do not need to add permission for invocation as it assume the role.
+        # LambdaConfig:   # lambda invocation has bug in reference, please check fix (faced in 29th Oct 2018, verified in 18th Feb 2020)
+          # CustomMessage: # invoked before a verification/MFA message is sent,to customize the message dynamically
+          #   Fn::GetAtt: 
+          #     - CustomDashmessageLambdaFunction  # fix for custom-message
+          #     - Arn
+          # DefineAuthChallenge: # it will define custom authentication flow
+          #   Fn::GetAtt: 
+          #     - DefineDashauthDashchallengeLambdaFunction  # fix for define-auth-challenge
+          #     - Arn
+          # CreateAuthChallenge: # after 'define auth challenge' if custom challenge is specified in 'define auth challenge'
+          #   Fn::GetAtt: 
+          #     - CreateDashauthDashchallengeLambdaFunction  # fix for create-auth-challenge
+          #     - Arn
+          # PreSignUp: # before user sign up for custom validation
+          #   Fn::GetAtt: 
+          #     - PreDashsignDashupLambdaFunction  # fix for pre-sign-up
+          #     - Arn
+          # PostConfirmation: # invoked after a user confirm,to send custom messages/ add custom logic,e.g analytics.
+          #   Fn::GetAtt: 
+          #     - PostDashconfirmationLambdaFunction # fix for post-confirmation  
+          #     - Arn
+          # PreAuthentication:  #  pre-login trigger to accept sign in or not
+          #   Fn::GetAtt: 
+          #     - PreDashauthenticationLambdaFunction # fix for pre-authentication  
+          #     - Arn
+          # PostAuthentication: # post-login trigger to add logs or analytics etc
+          #   Fn::GetAtt: 
+          #     - PostDashauthenticationLambdaFunction # fix for post-authentication  
+          #     - Arn
+          # PreTokenGeneration: #invoked before the token generation, allowing you to customize the claims in the identity token.
+          #   Fn::GetAtt: 
+          #     - PreDashtokenDashgenerationLambdaFunction # fix for pre-token-generation  
+          #     - Arn
+          # UserMigration: #invokes this trigger when a user does not exist in the user pool at the time of sign-in with a password, or in the forgot-password flow.
+          #   Fn::GetAtt: 
+          #     - UserDashmigrationLambdaFunction # fix for user-migration  
+          #     - Arn
+          # VerifyAuthChallengeResponse: # invoked to verify if the response from the end user for a custom authentication challenge is valid or not.
+          #   Fn::GetAtt: 
+          #     - VerifyDashauthDashchallengeDashresponseLambdaFunction # fix for verify-auth-challenge-response  
+          #     - Arn
+        # EmailVerificationMessage: String
+        # EmailVerificationSubject: String
+        # TOTP only is not supported on 29- OCT-2018
+        # SmsAuthenticationMessage: Code {####}
+        # SmsVerificationMessage: Code {####}

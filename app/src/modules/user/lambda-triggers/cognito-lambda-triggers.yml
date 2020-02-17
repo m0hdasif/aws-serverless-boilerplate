@@ -1,0 +1,109 @@
+custom-message:
+  handler: src/modules/user/lambda-triggers/custom-message.handler
+  description: invoked before a verification/MFA message is sent,to customize the message dynamically
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: CustomMessage         
+define-auth-challenge:
+  handler: src/modules/user/lambda-triggers/define-auth-challenge.handler
+  description: it will define custom authentication flow
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: DefineAuthChallenge
+create-auth-challenge:
+  handler: src/modules/user/lambda-triggers/create-auth-challenge.handler
+  description: after 'define auth challenge' if custom challenge is specified in 'define auth challenge'
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: CreateAuthChallenge
+pre-sign-up:
+  handler: src/modules/user/lambda-triggers/pre-sign-up.handler
+  description: before user sign up for custom validation
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: PreSignUp
+post-confirmation:
+  handler: src/modules/user/lambda-triggers/post-confirmation.handler
+  description: invoked after a user confirm,to send custom messages/ add custom logic,e.g analytics.
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: PostConfirmation
+pre-authentication:
+  handler: src/modules/user/lambda-triggers/pre-authentication.handler
+  description: pre-login trigger to accept sign in or not
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: PreAuthentication
+post-authentication:
+  handler: src/modules/user/lambda-triggers/post-authentication.handler
+  description: post-login trigger to add logs or analytics etc
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: PostAuthentication
+pre-token-generation:
+  handler: src/modules/user/lambda-triggers/pre-token-generation.handler
+  description: invoked before the token generation, allowing you to customize the claims in the identity token.
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: PreTokenGeneration
+user-migration:
+  handler: src/modules/user/lambda-triggers/user-migration.handler
+  description: invokes this trigger when a user does not exist in the user pool at the time of sign-in with a password, or in the forgot-password flow.
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: UserMigration
+verify-auth-challenge-response:
+  handler: src/modules/user/lambda-triggers/verify-auth-challenge-response.handler
+  description: invoked to verify if the response from the end user for a custom authentication challenge is valid or not.
+  events:
+    - cognitoUserPool:
+        pool: UserPool
+        trigger: VerifyAuthChallengeResponse
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

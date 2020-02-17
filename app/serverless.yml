@@ -18,6 +18,7 @@ service: aws-boilerplate
 
 # You can pin your service to only deploy with a specific Serverless version
 frameworkVersion: ">=1.55.1 <2.0.0"
+
 plugins:
   - serverless-plugin-typescript 
   - serverless-offline-scheduler # Need to use sls offline start / sls schedule 
@@ -45,7 +46,6 @@ provider:
     DB_USER_NAME: ${self:custom.secrets.db.userName}
     DB_PASSWORD: ${self:custom.secrets.db.password}
   
-  # websocketApiRouteSelectionExpression: $request.body.action # default value
 
 # s3 buckets custom configuration can be placed under provider (in camelCase not PascalCase)
 # Sub properties should be according to the specification
@@ -93,6 +93,7 @@ custom:
   hostedBucketName: ${self:custom.appName}-${self:custom.stage}-asif.com
   secrets: ${file(environments/secrets.${self:custom.stage}.yml)}
   resourcePrefix: ${self:custom.appName}-${self:custom.stage}
+  userpoolName: ${self:custom.resourcePrefix}-userpool
   ## plugins variables
   # serverless-plugin-split-stack
   splitStacks:
@@ -115,8 +116,12 @@ custom:
 
 ## Add Lambda functions configuration here
 functions:
+  # lambda functions for cognito trigger
+  - ${file(src/modules/user/lambda-triggers/cognito-lambda-triggers.yml)}
+  # user defined functions
   - ${file(src/modules/hello/functions1.yml)}
   - ${file(src/modules/hello/functions2.yml)}
+  # websockets lambda functions
   - ${file(src/modules/websocket/socket.yml)}
 
 
@@ -124,7 +129,9 @@ functions:
 resources:
   # yaml file for storing all s3 buckets
   - ${file(resources/buckets.yml):resources}
-
+  # yaml file for user pools and clients 
+  - ${file(resources/user-pools.yml):resources}
+  
 Outputs:
   exampleBucketName:
     ${file(./resources/buckets.yml):outputs.exampleBucketName}
