@@ -8,10 +8,10 @@ resources:
         BucketName: ${self:custom.exampleBucketName} # eg. aws-boilerplate-dev-example-bucket
         Tags: 
           - 
-            Key: Stage
+            Key: STAGE
             Value: ${self:custom.stage}
           - 
-            Key: App
+            Key: APP
             Value: ${self:custom.appName} 
         VersioningConfiguration:
           Status: Enabled  # Allowed Values: Enabled | Suspended 
