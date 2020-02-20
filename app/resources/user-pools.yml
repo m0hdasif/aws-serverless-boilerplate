@@ -155,3 +155,65 @@ resources:
         # TOTP only is not supported on 29- OCT-2018
         # SmsAuthenticationMessage: Code {####}
         # SmsVerificationMessage: Code {####}
+    
+    # client is necessary in order to integrate cognito userpool in application
+    CognitoUserPoolUserpoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: ${self:custom.userpoolClientName}
+        UserPoolId:
+          Ref: CognitoUserPoolUserPool
+        RefreshTokenValidity: 30  # 0-3650
+        GenerateSecret: true  # true | false
+        PreventUserExistenceErrors: ENABLED # ENABLED|LEGACY # legacy for userNotFound Exception, # enabled for generic exception for events
+        ExplicitAuthFlows:
+          - ALLOW_ADMIN_USER_PASSWORD_AUTH # username & password auth for admin APIs
+          - ALLOW_CUSTOM_AUTH  # lambda trigger based authentication
+          - ALLOW_USER_PASSWORD_AUTH # username password based authentication
+          - ALLOW_USER_SRP_AUTH  # SRP (secure remote password) protocol based authentication 
+          - ALLOW_REFRESH_TOKEN_AUTH # refresh token based authentication ( by default enabled)
+        # AnalyticsConfiguration:
+        #     ApplicationId: String  # application ID for an Amazon Pinpoint application
+        #     # ExternalId: String # for 3rd party temporary access
+        #     RoleArn: String   # IAM role ARN tp authorize to publish event to amazon pinpoint 
+        #     UserDataShared: true # true|false # if true, Cognito will include user data in the events it publishes to Amazon Pinpoint analytics. 
+        SupportedIdentityProviders:
+          - COGNITO
+          - Facebook
+          # - Google
+          # - LoginWithAmazon
+        # Set attributes access ( by default, all access)
+        ReadAttributes: # list of default and custom attributes that userpool client will have access to read
+          # - "dev:custom:role"
+          - "custom:firstName"
+          - "custom:lastName"
+          # - "dev:custom:createdAt"
+        WriteAttributes: # list of default and custom attributes that userpool client will have access to read
+          # - "dev:custom:role"
+          - "custom:firstName"
+          - "custom:lastName"
+        AllowedOAuthFlows: # code| implicit | client_credentials # max-3
+        # For detail,visit this link:https://aws.amazon.com/blogs/mobile/understanding-amazon-cognito-user-pool-oauth-2-0-grants/
+          # The authorization code grant is the preferred method for authorizing end users. 
+          # Instead of directly providing user pool tokens to an end user upon authentication, an authorization code is provided.
+          - code 
+          # user pool tokens are exposed directly to the end user. 
+          # As a result, the ID and access tokens have more potential to become compromised before they expire. On the other hand, if your setup doesn’t contain any server-side logic, you may want to use the implicit grant to prevent refresh tokens from being exposed to the client, as the implicit grant does not generate refresh tokens.
+          - implicit 
+          # the client credentials grant is typically intended to provide credentials to an application in order to authorize machine-to-machine requests.
+          # it needs client secret
+          # - client_credentials
+        AllowedOAuthFlowsUserPoolClient: true # true|false -> true to allow Oauth
+        AllowedOAuthScopes: # max-50
+          - phone
+          - email
+          - openid
+          - profile
+          - aws.cognito.signin.user.admin
+        ## redirection configurations
+        DefaultRedirectURI: http://localhost # must be in callback Urls
+        LogoutURLs:
+          - http://localhost/logout
+        # A list of allowed redirect (callback) URLs for the identity providers.
+        CallbackURLs: # max-100
+          - http://localhost

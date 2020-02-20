@@ -94,6 +94,7 @@ custom:
   secrets: ${file(environments/secrets.${self:custom.stage}.yml)}
   resourcePrefix: ${self:custom.appName}-${self:custom.stage}
   userpoolName: ${self:custom.resourcePrefix}-userpool
+  userpoolClientName: ${self:custom.resourcePrefix}-userpool-client
   ## plugins variables
   # serverless-plugin-split-stack
   splitStacks:
