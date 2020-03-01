@@ -1,4 +1,7 @@
+import * as UTIL from '@utils/common';
+
 export const lambda1 = async (event: any, context: any) => {
+  console.log(UTIL.isExist(['a','b'],'a'));
   console.log("ASIF: hello2 -> event", event);
   console.log(`ASIF: process.env`, process.env);
   return {

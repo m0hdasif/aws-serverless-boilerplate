@@ -4,7 +4,7 @@
   "description" : "Template for common services to provide the re-usability like logs, serverless yml file template, basic utility functions, nodejs  and services for the AWS.",
   "main"        : "index.js",
   "dependencies": {
-    "module-alias": "^2.2.2"
+    "link-module-alias": "^1.2.0"
   },
   "devDependencies": {
     "aws-sdk"                       : "^2.614.0",
@@ -17,13 +17,16 @@
     "typescript"                    : "^3.7.5"
   },
   "scripts": {
-    "debug": "export SLS_DEBUG=* && node --inspect=5858 /usr/local/bin/serverless offline -s dev -v",
-    "start": "/usr/local/bin/serverless offline start -s dev ",
-    "test" : "echo \"Error: no test specified\" && exit 1"
+    "debug"      : "export SLS_DEBUG=* && node --inspect=5858 /usr/local/bin/serverless offline -s dev -v",
+    "start"      : "/usr/local/bin/serverless offline start -s dev ",
+    "prestart"  : "link-module-alias",
+    "test"       : "echo \"Error: no test specified\" && exit 1",
+    "preinstall" : "which link-module-alias && link-module-alias clean || echo",
+    "postinstall": "link-module-alias"
   },
   "_moduleAliases": {
-    "@utils"   : ".build/src/utils",
     "@services": ".build/src/services",
+    "@utils"   : ".build/src/utils",
     "~src"     : ".build/src"
   },
   "keywords": [
