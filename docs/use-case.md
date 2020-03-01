@@ -40,7 +40,7 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    3. [ ] serverless-aws-alias(check)
    4. [x] '@hewmen/serverless-plugin-typescript' || serverless-plugin-typescript
    5. [ ] tsconfig-paths-webpack-plugin(check)
-   6. [ ] serverless-plugin-warmup(schedule lambda function run so that they run faster on winter)
+   6. [ ] serverless-plugin-warmup(schedule lambda function run so that they run faster on winter) and serverless-plugin-warmup-ts-bridge
    7. [ ] serverless-plugin-optimize
    8. [ ] Serverless AWS Pseudo Parameters (serverless-pseudo-parameters)
    9. [ ] Serverless Webpack
