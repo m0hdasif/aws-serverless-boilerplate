@@ -10,7 +10,7 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    3. [ ] Dynamo DB
    4. [ ] Mongo DB
    5. [ ] RDS(SQL)
-   6. [ ] Cognito(and its backup)
+   6. [x] Cognito(and its backup)
    7. [ ] Logs in S3 (use Logger)
    8. [ ] SES
    9. [ ] SNS and pinpoint
@@ -44,7 +44,7 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    7. [ ] serverless-plugin-optimize
    8. [ ] Serverless AWS Pseudo Parameters (serverless-pseudo-parameters)
    9. [ ] Serverless Webpack
-   10. [ ] Serverless Dotenv
+   10. [x] Serverless Dotenv (serverless-dotenv-plugin)
    11. [ ] Serverless Mocha Plugin
    12. [ ] Serverless S3 Remover(serverless-s3-remover)
    13. [ ] serverless-step-functions-offline
@@ -78,15 +78,14 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    41. [ ] serverless-nested-stack(check)
    42. [ ] serverless-aws-nested-stack
    43. [ ] serverless-optimizer-plugin
-   44. [ ] serverless-dotenv-plugin
-   45. [ ] serverless-webpack
-   46. [ ] serverless-prune-plugin
-   47. [ ] serverless-offline-sns
-   48. [ ] serverless-plugin-multiple-responses
-   49. [ ] tsconfig-paths-webpack-plugin 
-   50. [ ] serverless-mysql
-   51. [ ] serverless-plugin-canary-deployments
-   52. [ ] serverless-plugin-chrome (for running Puppeteer on AWS Lambda)
+   44. [ ] serverless-webpack
+   45. [ ] serverless-prune-plugin
+   46. [ ] serverless-offline-sns
+   47. [ ] serverless-plugin-multiple-responses
+   48. [ ] tsconfig-paths-webpack-plugin 
+   49. [ ] serverless-mysql
+   50. [ ] serverless-plugin-canary-deployments
+   51. [ ] serverless-plugin-chrome (for running Puppeteer on AWS Lambda)
 
 6. **Implement in ts**
 7. Maintain one file for helpful commands for both sls and aws
