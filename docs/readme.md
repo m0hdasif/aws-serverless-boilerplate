@@ -29,6 +29,7 @@
   - [Schedule lambda function locally](#schedule-lambda-function-locally)
   - [Deploy resources to s3 bucket](#deploy-resources-to-s3-bucket)
   - [Maintain Stage related secrets](#maintain-stage-related-secrets)
+  - [Support .env file](#support-env-file)
 
 ## Setup 
 
@@ -282,3 +283,17 @@ Configure using one of the following options.
     ```
     ###### Note: This method is better than no-encryption, but not recommended. AWS recommends to use AWS-KMS instead of environment variables.
     ##### Note: password used for encryption/decryption : 'asif'
+
+### Support .env file
+* To add support for .env file and use them for various staging.
+    * Install plugin and add the plugin into plugins array
+        ```sh
+        npm i -D serverless-dotenv-plugin
+        ```
+    * Create a .env file and add to .gitignore. Create one example file with `.env.example` name for expected environment variables.
+    * We can have separate file for each environment following `.env.{stageName}`. E.g. `.env.dev`
+    * To change the file-path for .env files, add custom variable in `serverless.yml` file (Optional)
+    ```yaml
+        dotenv:
+        basePath: environments/ # trailing / is necessary to tell the directory name, else it will look for {basePath}.env file 
+    ```

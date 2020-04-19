@@ -20,6 +20,7 @@ service: aws-boilerplate
 frameworkVersion: ">=1.55.1 <2.0.0"
 
 plugins:
+  - serverless-dotenv-plugin
   - serverless-plugin-typescript 
   - serverless-offline-scheduler # Need to use sls offline start / sls schedule 
   - serverless-offline
@@ -114,6 +115,10 @@ custom:
               CacheControl: max-age=31104000 # 1 year
   # serverless secret plugin
   secretsFilePathPrefix: environments
+  # serverless-dotenv-plugin
+  dotenv:
+    basePath: environments/
+    # logging: true # to disable logs for environment variables
 
 ## Add Lambda functions configuration here
 functions:

@@ -9,4 +9,6 @@ package-lock.json
 # secrets for serverless
 secrets.yml
 # stage specific secrets
-environments/secrets.*.yml
+environments/**
+!environments/*.encrypted
+!.env.example

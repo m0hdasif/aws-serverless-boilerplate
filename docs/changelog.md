@@ -2,6 +2,8 @@
 
 #### All notable changes to the "aws-serverless-nodejs-template" will be documented in this file.
 
+### [0.7.1]
+* Added .env file support for stage related info
 
 ### [0.7.0]
 * Added cognito userpool with lambda triggers
