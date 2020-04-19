@@ -118,7 +118,7 @@ custom:
   # serverless-dotenv-plugin
   dotenv:
     basePath: environments/
-    # logging: true # to disable logs for environment variables
+    # logging: false # to disable logs for environment variables
 
 ## Add Lambda functions configuration here
 functions:
