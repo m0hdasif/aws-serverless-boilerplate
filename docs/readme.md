@@ -263,7 +263,7 @@ Configure using one of the following options.
     ```
 
 ### Maintain Stage related secrets
-* To maintain secrets and share encryted variable without any fear of revealing it in repo. 
+* To maintain secrets and share encrypted variable without any fear of revealing it in repo. 
   * Install plugin and add the plugin into plugins array
     ```sh 
     npm i -D serverless-secrets-plugin
@@ -276,7 +276,7 @@ Configure using one of the following options.
     ```sh 
     serverless decrypt --stage|-s STAGE --password|-p PASSWORD
     ```
-  * To change the file-path of secrets, add custom Variable in `serverless.yml` file (Optional)
+  * To change the file-path of secrets, add custom variable in `serverless.yml` file (Optional)
     ```yaml
     secretsFilePathPrefix: filePath
     ```
