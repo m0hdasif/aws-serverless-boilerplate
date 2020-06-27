@@ -7,9 +7,8 @@
 ### Table of Content
 - [Setup](#setup)
   - [Install aws-cli globally (Optional)](#install-aws-cli-globally-optional)
-    - [apt package (recommended for Ubuntu)](#apt-package-recommended-for-ubuntu)
-    - [Use python package](#use-python-package)
-    - [Executable file (recommended for windows)](#executable-file-recommended-for-windows)
+    - [Python package](#python-package)
+    - [Executable file (windows only)](#executable-file-windows-only)
   - [Install serverless globally](#install-serverless-globally)
   - [Configure AWS Account](#configure-aws-account)
     - [Pre-conditions](#pre-conditions)
@@ -37,12 +36,9 @@ For setting up the development environment, please follow the provided steps.
 
 ### Install aws-cli globally (Optional) 
 
-#### apt package (recommended for Ubuntu)
-```sh
-sudo apt-get install awscli
-```
+*Use either method to install awscli*
 
-#### Use python package
+#### Python package
 **Pre-requirements**
 *  Python should be installed on your system
 *  Pip should be installed.
@@ -54,7 +50,7 @@ sudo apt-get install awscli
       pip3 install awscli 
       ```
 
-#### Executable file (recommended for windows)
+#### Executable file (windows only)
 * Download the executable file from [aws official download page](https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html), execute file and follow on-screen steps to install Aws-cli.
 
     ##### Note: you may need to add path of the installed program to the environment variable 
