@@ -86,6 +86,7 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    49. [ ] serverless-mysql
    50. [ ] serverless-plugin-canary-deployments
    51. [ ] serverless-plugin-chrome (for running Puppeteer on AWS Lambda)
+   52. [ ] serverless-plugin-modularize
 
 6. **Implement in ts**
 7. Maintain one file for helpful commands for both sls and aws
