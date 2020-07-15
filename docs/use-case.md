@@ -77,16 +77,16 @@ To use the reusable utility and functions (like logs, serverless yml file templa
    40. [ ] serverless-plugin-additional-stacks(check)
    41. [ ] serverless-nested-stack(check)
    42. [ ] serverless-aws-nested-stack
-   43. [ ] serverless-optimizer-plugin
-   44. [ ] serverless-webpack
-   45. [ ] serverless-prune-plugin
-   46. [ ] serverless-offline-sns
-   47. [ ] serverless-plugin-multiple-responses
-   48. [ ] tsconfig-paths-webpack-plugin 
-   49. [ ] serverless-mysql
-   50. [ ] serverless-plugin-canary-deployments
-   51. [ ] serverless-plugin-chrome (for running Puppeteer on AWS Lambda)
-   52. [ ] serverless-plugin-modularize
+   43. [ ] serverless-webpack
+   44. [ ] serverless-prune-plugin
+   45. [ ] serverless-offline-sns
+   46. [ ] serverless-plugin-multiple-responses
+   47. [ ] tsconfig-paths-webpack-plugin 
+   48. [ ] serverless-mysql
+   49. [ ] serverless-plugin-canary-deployments
+   50. [ ] serverless-plugin-chrome (for running Puppeteer on AWS Lambda)
+   51. [ ] serverless-plugin-modularize
+   52. [ ] serverless-cognito-add-custom-attributes
 
 6. **Implement in ts**
 7. Maintain one file for helpful commands for both sls and aws
