@@ -101,8 +101,8 @@ resources:
         # EmailConfiguration:
         #   ConfigurationSet: String # TODO: check this property
         #   EmailSendingAccount: DEVELOPER # COGNITO_DEFAULT | DEVELOPER (SES) # need to create permissions for SES to send emails on behalf on cognito
-        #   From: muhammadasifmansoori@gmail.com # Default value: no-reply@verificationemail.com
-        #   ReplyToEmailAddress: muhammadasifmansoori@gmail.com # needs to be verified
+        #   From: Email # Default value: no-reply@verificationemail.com
+        #   ReplyToEmailAddress: Email # needs to be verified
         #   SourceArn: String # get arn on verifying email Id
         DeviceConfiguration:
           ChallengeRequiredOnNewDevice: true

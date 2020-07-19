@@ -1,0 +1,6 @@
+sesExample:
+  handler: src/modules/ses-example/index.sesSendMail
+  events:
+    - http:
+        path: ses-example
+        method: post

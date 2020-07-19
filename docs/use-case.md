@@ -121,3 +121,10 @@ To use the reusable utility and functions (like logs, serverless yml file templa
 35. Automate encryption and decryption while executing project offline or deploying  [serverless-secrets-plugin]
 36. Add load balancer configuration
 37. Implement userpool identity
+38. Add below SES and template functionality
+    1.  Handle different department for sending the emails | default emails
+    2.  Handle errors and throw error if cannot send email to one of the person
+    3.  make a mapper for the default data and role, template handling 
+    4.  Make support for template data (whether to sanitize the input or not)
+    5.  support for attachments in templates
+    6.  Add commands to verify the emails from command line

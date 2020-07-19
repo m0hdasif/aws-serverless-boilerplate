@@ -30,7 +30,7 @@ plugins:
 
 provider:
   ## project variables
-  profile: ${file(./secrets.yml):profile} # to avoid incidental deployment to other accounts (Value:aws-profile-name)
+  profile: ${file(./secrets.yml):profile,'default'} # to avoid incidental deployment to other accounts (Value:aws-profile-name)
   name: aws
   runtime: nodejs12.x
   stage: ${self:custom.stage} # default-> dev
@@ -46,6 +46,7 @@ provider:
     DB_PORT: ${self:custom.secrets.db.port}
     DB_USER_NAME: ${self:custom.secrets.db.userName}
     DB_PASSWORD: ${self:custom.secrets.db.password}
+    AWS_PROFILE: ${self:provider.profile}
   
 
 # s3 buckets custom configuration can be placed under provider (in camelCase not PascalCase)
@@ -129,6 +130,8 @@ functions:
   - ${file(src/modules/hello/functions2.yml)}
   # websockets lambda functions
   - ${file(src/modules/websocket/socket.yml)}
+  # for ses example
+  - ${file(src/modules/ses-example/ses.yml)}
 
 
 ## you can add CloudFormation resource templates here
