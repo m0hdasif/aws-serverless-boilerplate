@@ -1,12 +1,14 @@
 {
   "name": "aws-serverless-boilerplate",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Template for common services to provide the re-usability like logs, serverless yml file template, basic utility functions, nodejs  and services for the AWS.",
   "main": "index.js",
   "dependencies": {
-    "module-alias": "^2.2.2"
+    "module-alias": "^2.2.2",
+    "nodemailer": "^6.4.10"
   },
   "devDependencies": {
+    "@types/nodemailer": "^6.4.0",
     "aws-sdk": "^2.614.0",
     "serverless-dotenv-plugin": "^2.4.2",
     "serverless-offline": "^5.12.1",

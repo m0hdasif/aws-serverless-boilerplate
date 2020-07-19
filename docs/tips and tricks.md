@@ -8,3 +8,10 @@
 
 1. serverless console VS code extension plugin
 2. Use serverless IDE plugin
+
+## AWS sdk
+1. Use below code to switch the aws profile
+    ```js
+    const credentials = new AWS.SharedIniFileCredentials({profile: process.env.profile });
+    AWS.config.credentials = credentials;
+   ```
